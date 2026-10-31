@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getApiUser } from '@/lib/api-session';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     const user = await getApiUser(request);

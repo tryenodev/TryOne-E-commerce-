@@ -24,6 +24,17 @@ if (process.env.DATABASE_URL) {
       process.exit(1);
     }
   }
+
+  // 3. Optional auto-seed on deployment
+  if (process.env.AUTO_SEED === 'true') {
+    try {
+      console.log('[db-deploy] AUTO_SEED=true: Seeding database and products...');
+      execSync('npx tsx prisma/seed.ts && npx tsx scripts/seed-all-rich-products.ts', { stdio: 'inherit', env: process.env });
+      console.log('[db-deploy] Database seeding completed successfully.');
+    } catch (seedErr) {
+      console.warn('[db-deploy] Seed step warning:', seedErr.message);
+    }
+  }
 } else {
   console.log('[db-deploy] DATABASE_URL not set; skipping database migration step.');
 }

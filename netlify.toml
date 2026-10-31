@@ -1,0 +1,11 @@
+[build]
+  base = "api-web"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PRISMA_GENERATE_DATAPROXY = "false"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
