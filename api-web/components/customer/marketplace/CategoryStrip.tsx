@@ -36,13 +36,21 @@ export function CategoryStrip({
           const content = (
             <>
               <span
-                className={`flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full text-2xl bg-gradient-to-br from-slate-50 to-white border-2 transition-all duration-200 ${
+                className={`flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full text-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-white border-2 transition-all duration-200 ${
                   active
                     ? 'border-[#2563eb] shadow-md shadow-blue-100 scale-105'
                     : 'border-slate-100 hover:border-[#2563eb]/40 hover:shadow-sm'
                 }`}
               >
-                {cat.icon}
+                {cat.icon && (cat.icon.startsWith('/') || cat.icon.startsWith('http')) ? (
+                  <img
+                    src={cat.icon}
+                    alt={cat.name}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  cat.icon
+                )}
               </span>
               <span
                 className={`text-[11px] sm:text-xs text-center max-w-[76px] leading-tight mt-2 line-clamp-2 ${

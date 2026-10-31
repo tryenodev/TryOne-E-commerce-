@@ -304,7 +304,13 @@ export default function AdminCategoriesPage() {
             <tbody className="divide-y divide-slate-100">
               {categories.map((cat) => (
                 <tr key={cat.id}>
-                  <td className="px-4 py-3 text-xl">{cat.icon}</td>
+                  <td className="px-4 py-3 text-xl">
+                    {cat.icon && (cat.icon.startsWith('/') || cat.icon.startsWith('http')) ? (
+                      <img src={cat.icon} alt="" className="h-8 w-8 object-cover rounded-full inline-block" />
+                    ) : (
+                      cat.icon
+                    )}
+                  </td>
                   <td className="px-4 py-3 font-medium">{cat.name}</td>
                   <td className="px-4 py-3 text-slate-500">{cat.slug}</td>
                   <td className="px-4 py-3">{cat._count.products}</td>

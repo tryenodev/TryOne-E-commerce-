@@ -196,7 +196,7 @@ export default function AdminMenuPage() {
               <option value="">Custom link…</option>
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>
-                  {c.icon} {c.name}
+                  {c.icon && (c.icon.startsWith('/') || c.icon.startsWith('http')) ? '🖼️ ' : c.icon ? `${c.icon} ` : ''}{c.name}
                 </option>
               ))}
             </select>

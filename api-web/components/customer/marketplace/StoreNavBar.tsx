@@ -148,8 +148,12 @@ export function StoreNavBar({
                         onClick={() => setMegaOpen(false)}
                         className="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-[#2563eb]"
                       >
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-50 text-base border border-slate-100">
-                          {cat.icon || '🛍️'}
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-50 text-base border border-slate-100 overflow-hidden">
+                          {cat.icon && (cat.icon.startsWith('/') || cat.icon.startsWith('http')) ? (
+                            <img src={cat.icon} alt="" className="h-full w-full object-cover" />
+                          ) : (
+                            cat.icon || '🛍️'
+                          )}
                         </span>
                         <span className="font-medium">{cat.name}</span>
                       </Link>

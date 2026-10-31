@@ -183,7 +183,20 @@ async function main() {
     },
   });
 
-  console.log('Created products:', { product1, product2 });
+  const product3 = await prisma.product.create({
+    data: {
+      name: 'Smartphone 5G',
+      description: 'Flagship 5G smartphone with AMOLED display & high-resolution camera',
+      price: 19999.00,
+      costPrice: 14500.00,
+      stock: 25,
+      sku: 'MOBILE-001',
+      categoryId: electronics.id,
+      images: ['/images/mobile.jpg'],
+    },
+  });
+
+  console.log('Created products:', { product1, product2, product3 });
 
   console.log('Seeding complete!');
 }

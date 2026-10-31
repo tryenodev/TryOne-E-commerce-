@@ -71,7 +71,13 @@ export function ProductFilters({
                         : 'text-slate-600 hover:bg-slate-50'
                     }`}
                   >
-                    <span className="text-base leading-none">{c.icon || '🛍️'}</span>
+                    <span className="h-5 w-5 shrink-0 flex items-center justify-center overflow-hidden rounded">
+                      {c.icon && (c.icon.startsWith('/') || c.icon.startsWith('http')) ? (
+                        <img src={c.icon} alt="" className="h-full w-full object-cover rounded" />
+                      ) : (
+                        <span className="text-base leading-none">{c.icon || '🛍️'}</span>
+                      )}
+                    </span>
                     {c.name}
                   </button>
                 </li>

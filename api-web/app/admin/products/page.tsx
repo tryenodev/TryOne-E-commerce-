@@ -273,7 +273,7 @@ export default function AdminProductsPage() {
               <option value="">All categories</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
-                  {cat.icon ? `${cat.icon} ` : ''}{cat.name}
+                  {cat.icon && (cat.icon.startsWith('/') || cat.icon.startsWith('http')) ? '🖼️ ' : cat.icon ? `${cat.icon} ` : ''}{cat.name}
                 </option>
               ))}
             </select>
@@ -327,7 +327,7 @@ export default function AdminProductsPage() {
               <option value="">Select category</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
-                  {cat.icon ? `${cat.icon} ` : ''}{cat.name}
+                  {cat.icon && (cat.icon.startsWith('/') || cat.icon.startsWith('http')) ? '🖼️ ' : cat.icon ? `${cat.icon} ` : ''}{cat.name}
                   {cat.isVisible === false ? ' (hidden)' : ''}
                 </option>
               ))}

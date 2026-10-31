@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
               stock: sample.stock,
               sku,
               categoryId: cat.id,
-              images: [],
+              images: sample.images || [],
               isActive: true,
             },
           });
