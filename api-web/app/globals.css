@@ -1,0 +1,338 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 214 32% 93%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 32% 94%;
+    --muted-foreground: 215 16% 37%;
+    --accent: 214 32% 93%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-foreground antialiased;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    /* Minimal professional background */
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+    background-attachment: fixed;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Keep overlays nearly invisible for a clean look */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: none;
+    opacity: 0;
+  }
+
+  /* Refined text selection */
+  ::selection {
+    background: rgb(37 99 235 / 0.15);
+    color: #1e293b;
+  }
+
+  /* Consistent, accessible keyboard focus */
+  :focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Slim, unobtrusive scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  /* Smooth interactive elements by default */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease,
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  /* Smooth table row hovers */
+  tbody tr {
+    transition: background-color 0.15s ease;
+  }
+
+  /* Press feedback on buttons */
+  button:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+/* Lift app content above the decorative ::before */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Gentle entrance for page content */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: page-enter 0.3s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  main {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Customer portal — professional e-commerce storefront */
+.customer-portal {
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.customer-portal input,
+.customer-portal select,
+.customer-portal textarea,
+.customer-portal button {
+  font-family: inherit;
+}
+
+.customer-portal .scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.customer-portal .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Store content panels (below app header) */
+.customer-portal .store-panel {
+  @apply bg-white rounded-lg border border-slate-200/80 shadow-sm;
+}
+
+.customer-portal .store-product-card {
+  @apply transition-shadow duration-200;
+}
+
+/* Delivery / trust strip under main nav */
+.customer-portal .store-delivery-strip {
+  background: linear-gradient(
+    90deg,
+    #fffbeb 0%,
+    #eff6ff 35%,
+    #f0fdf4 65%,
+    #fffbeb 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 3px rgba(40, 116, 240, 0.06);
+}
+
+.customer-portal .store-delivery-pill {
+  @apply inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200;
+}
+
+.customer-portal .store-delivery-pill--location {
+  @apply bg-white border border-[#2563eb]/25 shadow-sm;
+  box-shadow: 0 1px 2px rgba(40, 116, 240, 0.08);
+}
+
+.customer-portal .store-delivery-pill--location:hover {
+  @apply border-[#2563eb]/50 bg-blue-50/50;
+  box-shadow: 0 2px 8px rgba(40, 116, 240, 0.12);
+}
+
+.customer-portal .store-delivery-pill--offer {
+  @apply bg-white/90 border border-emerald-200/80 shadow-sm;
+}
+
+.customer-portal .store-delivery-pill--cta {
+  @apply bg-[#2563eb] text-white font-semibold border border-[#1d4ed8] shadow-md;
+  box-shadow: 0 2px 6px rgba(40, 116, 240, 0.35);
+}
+
+.customer-portal .store-delivery-pill--cta:hover {
+  @apply bg-[#1d4ed8] brightness-105;
+  box-shadow: 0 4px 12px rgba(40, 116, 240, 0.4);
+}
+
+.customer-portal .store-delivery-divider {
+  @apply hidden md:block w-px h-8 bg-gradient-to-b from-transparent via-slate-300 to-transparent shrink-0;
+}
+
+/* Global palette override for existing utility classes used across pages */
+@layer utilities {
+  .from-fuchsia-600,
+  .from-fuchsia-500,
+  .from-fuchsia-300,
+  .from-pink-500,
+  .from-pink-400,
+  .from-rose-500,
+  .from-rose-400 {
+    --tw-gradient-from: rgb(51 65 85 / var(--tw-gradient-from-opacity, 1)) var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(51 65 85 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
+
+  .via-pink-500,
+  .via-indigo-900,
+  .via-violet-900 {
+    --tw-gradient-stops: var(--tw-gradient-from), rgb(71 85 105 / var(--tw-gradient-via-opacity, 1)) var(--tw-gradient-via-position), var(--tw-gradient-to);
+  }
+
+  .to-sky-500,
+  .to-sky-400,
+  .to-sky-300,
+  .to-violet-50,
+  .to-fuchsia-900,
+  .to-fuchsia-50,
+  .to-pink-50,
+  .to-indigo-50,
+  .to-rose-50,
+  .to-emerald-50,
+  .to-teal-50 {
+    --tw-gradient-to: rgb(100 116 139 / var(--tw-gradient-to-opacity, 1)) var(--tw-gradient-to-position);
+  }
+
+  .bg-fuchsia-200,
+  .bg-pink-200,
+  .bg-rose-100,
+  .bg-violet-100,
+  .bg-sky-100,
+  .bg-sky-200,
+  .bg-emerald-100 {
+    background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));
+  }
+
+  .text-fuchsia-600,
+  .text-fuchsia-500,
+  .text-pink-600,
+  .text-rose-700,
+  .text-violet-700,
+  .text-sky-700,
+  .text-emerald-700,
+  .text-amber-700 {
+    color: rgb(51 65 85 / var(--tw-text-opacity, 1));
+  }
+
+  .border-fuchsia-200,
+  .border-pink-200,
+  .border-rose-200,
+  .border-violet-200,
+  .border-sky-200,
+  .border-emerald-200 {
+    border-color: rgb(203 213 225 / var(--tw-border-opacity, 1));
+  }
+
+  .shadow-xl,
+  .shadow-2xl,
+  .shadow-lg {
+    --tw-shadow: 0 4px 14px -8px rgb(15 23 42 / 0.2);
+    --tw-shadow-colored: 0 4px 14px -8px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+}
