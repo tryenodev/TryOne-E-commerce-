@@ -25,14 +25,18 @@ if (process.env.DATABASE_URL) {
     }
   }
 
-  // 3. Optional auto-seed on deployment
-  if (process.env.AUTO_SEED === 'true') {
+  // 3. Ensure demo users and categories exist (idempotent upserts)
+  if (process.env.AUTO_SEED !== 'false') {
     try {
-      console.log('[db-deploy] AUTO_SEED=true: Seeding database and products...');
-      execSync('npx tsx prisma/seed.ts && npx tsx scripts/seed-all-rich-products.ts', { stdio: 'inherit', env: process.env });
-      console.log('[db-deploy] Database seeding completed successfully.');
+      console.log('[db-deploy] Running prisma/seed.ts to ensure demo accounts exist...');
+      execSync('npx tsx prisma/seed.ts', { stdio: 'inherit', env: process.env });
+      if (process.env.AUTO_SEED === 'true') {
+        console.log('[db-deploy] AUTO_SEED=true: Seeding rich sample products...');
+        execSync('npx tsx scripts/seed-all-rich-products.ts', { stdio: 'inherit', env: process.env });
+      }
+      console.log('[db-deploy] Seeding finished successfully.');
     } catch (seedErr) {
-      console.warn('[db-deploy] Seed step warning:', seedErr.message);
+      console.warn('[db-deploy] Seed step warning (non-fatal):', seedErr.message);
     }
   }
 } else {

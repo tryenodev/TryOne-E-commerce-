@@ -4,7 +4,9 @@ import type { NextRequest } from 'next/server';
 import { authOptions } from './auth';
 
 /** Same secret as JWT login (POST /api/auth/login). */
-const JWT_SECRET = process.env.NEXTAUTH_SECRET || 'fallback-secret-for-dev';
+const JWT_SECRET =
+  process.env.NEXTAUTH_SECRET ||
+  '5e1a42926e6672323d3b6438eedf8c2d6cd171bb367913c3eab57b20886eddd6';
 const secretKey = new TextEncoder().encode(JWT_SECRET);
 
 export type ApiUser = {

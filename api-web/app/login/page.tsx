@@ -60,18 +60,33 @@ function LoginContent() {
     setError('');
     setLoading(true);
 
-    const result = await signIn('credentials', {
-      email: loginEmail,
-      password: loginPassword,
-      redirect: false,
-    });
+    try {
+      const result = await signIn('credentials', {
+        email: loginEmail,
+        password: loginPassword,
+        redirect: false,
+        callbackUrl: '/dashboard',
+      });
 
-    setLoading(false);
-
-    if (result?.error) {
-      setError('Invalid email or password');
-    } else {
-      router.push('/dashboard');
+      if (result?.error) {
+        setLoading(false);
+        console.error('[Login] Failed:', result.error);
+        if (result.error === 'CredentialsSignin') {
+          setError('Invalid email or password');
+        } else {
+          setError(`Login failed (${result.error}). Please try again.`);
+        }
+      } else if (result?.ok) {
+        // Full page navigation ensures session cookies are recognized immediately by SessionProvider
+        window.location.href = result.url || '/dashboard';
+      } else {
+        setLoading(false);
+        setError('Login failed. Please try again.');
+      }
+    } catch (err: any) {
+      setLoading(false);
+      console.error('[Login] Error:', err);
+      setError(err?.message || 'An unexpected error occurred during login');
     }
   };
 
